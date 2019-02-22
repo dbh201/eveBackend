@@ -1,4 +1,4 @@
->May As Well Learn MarkDown While I'm At It (tm)
+> May As Well Learn MarkDown While I'm At It (tm)
 
 
 # eveBackend
@@ -21,7 +21,9 @@ huge treks.
 
 ## TODO:
 1. Basic API endpoints:
+
 	1. Items
+
 	- [x] Convert item ID to name
 	- [x] Convert item name to ID
 	- [ ] Get item group ID for an item by ID
@@ -34,6 +36,7 @@ huge treks.
 	- [ ] Get a list of ID/name pairs for a group by group ID
 
 	1. Regions
+
 	- [ ] Convert region ID to name
 	- [ ] Convert region name to ID
 	- [ ] Get adjacent region names for a region by name
@@ -47,10 +50,12 @@ huge treks.
 	- [ ] Get list of system ID/name pairs for a region by ID
 
 	1. Systems
+
 	- [ ] Convert system ID to name
 	- [ ] Convert system name to ID
 
 	1. Market Orders
+
 	- [ ] Get a list of buy orders for an item ID by region ID
 	- [ ] Get a list of sell orders for an item ID by region ID
 	- [ ] Get a list of buy orders for an item ID by region name
