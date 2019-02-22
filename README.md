@@ -54,24 +54,26 @@ huge treks.
 	- [ ] Convert system ID to name
 	- [ ] Convert system name to ID
 
-	1. Market Orders
+	1. Market Buy Orders
 
 	- [ ] Get a list of buy orders for an item ID by region ID
-	- [ ] Get a list of sell orders for an item ID by region ID
 	- [ ] Get a list of buy orders for an item ID by region name
-	- [ ] Get a list of sell orders for an item ID by region name
 	- [ ] Get a list of buy orders for an item name by region ID
-	- [ ] Get a list of sell orders for an item name by region ID
 	- [ ] Get a list of buy orders for an item name by region name
-	- [ ] Get a list of sell orders for an item name by region name
-
 	- [ ] Get a list of buy orders for an item group ID by system ID
-	- [ ] Get a list of sell orders for an item group ID by system ID
 	- [ ] Get a list of buy orders for an item group ID by system name
-	- [ ] Get a list of sell orders for an item group ID by system name
 	- [ ] Get a list of buy orders for an item group name by system ID
-	- [ ] Get a list of sell orders for an item group name by system ID
 	- [ ] Get a list of buy orders for an item group name by system name
+
+	1. Market Sell Orders
+
+	- [ ] Get a list of sell orders for an item ID by region name
+	- [ ] Get a list of sell orders for an item ID by region ID
+	- [ ] Get a list of sell orders for an item name by region ID
+	- [ ] Get a list of sell orders for an item name by region name
+	- [ ] Get a list of sell orders for an item group ID by system ID
+	- [ ] Get a list of sell orders for an item group ID by system name
+	- [ ] Get a list of sell orders for an item group name by system ID
 	- [ ] Get a list of sell orders for an item group name by system name
 
 	1. Item Details
