@@ -20,73 +20,73 @@ low-sec risk. Limits for the jump count should be an option to avoid
 huge treks.
 
 ## TODO:
-1. Basic API endpoints:
+#### Basic API endpoints
 
-	#### 1. Items
+1. Items
 
-	- [x] Convert item ID to name
-	- [x] Convert item name to ID
-	- [ ] Get item group ID for an item by ID
-	- [ ] Get item group name for an item by ID
-	- [ ] Get item group ID for an item by name
-	- [ ] Get item group name for an item by name
-	- [ ] Get a list of item IDs in a group by group name
-	- [ ] Get a list of item names for a group by group ID	
-	- [ ] Get a list of ID/name pairs for a group by group name
-	- [ ] Get a list of ID/name pairs for a group by group ID
+- [x] Convert item ID to name
+- [x] Convert item name to ID
+- [ ] Get item group ID for an item by ID
+- [ ] Get item group name for an item by ID
+- [ ] Get item group ID for an item by name
+- [ ] Get item group name for an item by name
+- [ ] Get a list of item IDs in a group by group name
+- [ ] Get a list of item names for a group by group ID	
+- [ ] Get a list of ID/name pairs for a group by group name
+- [ ] Get a list of ID/name pairs for a group by group ID
 
-	#### 1. Regions
+1. Regions
 
-	- [ ] Convert region ID to name
-	- [ ] Convert region name to ID
-	- [ ] Get adjacent region names for a region by name
-	- [ ] Get adjacent region IDs for a region by name
-	- [ ] Get adjacent region ID/name pairs for a region by name
-	- [ ] Get adjacent region names for a region by ID
-	- [ ] Get adjacent region IDs for a region by ID
-	- [ ] Get adjacent region ID/name pairs for a region by ID
-	- [ ] Get list of system IDs for a region by ID
-	- [ ] Get list of system names for a region by ID
-	- [ ] Get list of system ID/name pairs for a region by ID
+- [ ] Convert region ID to name
+- [ ] Convert region name to ID
+- [ ] Get adjacent region names for a region by name
+- [ ] Get adjacent region IDs for a region by name
+- [ ] Get adjacent region ID/name pairs for a region by name
+- [ ] Get adjacent region names for a region by ID
+- [ ] Get adjacent region IDs for a region by ID
+- [ ] Get adjacent region ID/name pairs for a region by ID
+- [ ] Get list of system IDs for a region by ID
+- [ ] Get list of system names for a region by ID
+- [ ] Get list of system ID/name pairs for a region by ID
 
-	#### 1. Systems
+1. Systems
 
-	- [ ] Convert system ID to name
-	- [ ] Convert system name to ID
+- [ ] Convert system ID to name
+- [ ] Convert system name to ID
 
-	#### 1. Market Buy Orders
+1. Market Buy Orders
 
-	- [ ] Get a list of buy orders for an item ID by region ID
-	- [ ] Get a list of buy orders for an item ID by region name
-	- [ ] Get a list of buy orders for an item name by region ID
-	- [ ] Get a list of buy orders for an item name by region name
-	- [ ] Get a list of buy orders for an item group ID by system ID
-	- [ ] Get a list of buy orders for an item group ID by system name
-	- [ ] Get a list of buy orders for an item group name by system ID
-	- [ ] Get a list of buy orders for an item group name by system name
+- [ ] Get a list of buy orders for an item ID by region ID
+- [ ] Get a list of buy orders for an item ID by region name
+- [ ] Get a list of buy orders for an item name by region ID
+- [ ] Get a list of buy orders for an item name by region name
+- [ ] Get a list of buy orders for an item group ID by system ID
+- [ ] Get a list of buy orders for an item group ID by system name
+- [ ] Get a list of buy orders for an item group name by system ID
+- [ ] Get a list of buy orders for an item group name by system name
 
-	#### 1. Market Sell Orders
+1. Market Sell Orders
 
-	- [ ] Get a list of sell orders for an item ID by region name
-	- [ ] Get a list of sell orders for an item ID by region ID
-	- [ ] Get a list of sell orders for an item name by region ID
-	- [ ] Get a list of sell orders for an item name by region name
-	- [ ] Get a list of sell orders for an item group ID by system ID
-	- [ ] Get a list of sell orders for an item group ID by system name
-	- [ ] Get a list of sell orders for an item group name by system ID
-	- [ ] Get a list of sell orders for an item group name by system name
+- [ ] Get a list of sell orders for an item ID by region name
+- [ ] Get a list of sell orders for an item ID by region ID
+- [ ] Get a list of sell orders for an item name by region ID
+- [ ] Get a list of sell orders for an item name by region name
+- [ ] Get a list of sell orders for an item group ID by system ID
+- [ ] Get a list of sell orders for an item group ID by system name
+- [ ] Get a list of sell orders for an item group name by system ID
+- [ ] Get a list of sell orders for an item group name by system name
 
-	#### 1. Item Details
-	- [ ] Get a list of item details for an item ID
-	- [ ] Get a list of item details for an item name
-	- [ ] Get volume of item by ID
-	- [ ] Get volume of item by name
-	- [ ] Get description of item by ID
-	- [ ] Get description of item by name
-	- [ ] Get item group of item by ID (redirect to /api/item)
-	- [ ] Get item group of item by name
-	- [ ] Get skill requirements of item by ID
-	- [ ] Get skill requirements of item by namy
-	- [ ] Get manufacturing requirements of item by ID (recursive?)
-	- [ ] Get manufacturing requirements of item by name (recursive?)
+1. Item Details
+- [ ] Get a list of item details for an item ID
+- [ ] Get a list of item details for an item name
+- [ ] Get volume of item by ID
+- [ ] Get volume of item by name
+- [ ] Get description of item by ID
+- [ ] Get description of item by name
+- [ ] Get item group of item by ID (redirect to /api/item)
+- [ ] Get item group of item by name
+- [ ] Get skill requirements of item by ID
+- [ ] Get skill requirements of item by namy
+- [ ] Get manufacturing requirements of item by ID (recursive?)
+- [ ] Get manufacturing requirements of item by name (recursive?)
 	
