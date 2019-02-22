@@ -25,15 +25,23 @@ huge treks.
 1. Items
    1. - [x] Convert item ID to name
    1. - [x] Convert item name to ID
-   1. - [ ] Get item group ID for an item by ID
-   1. - [ ] Get item group name for an item by ID
-   1. - [ ] Get item group ID for an item by name
-   1. - [ ] Get item group name for an item by name
-   1. - [ ] Get a list of item IDs in a group by group name
-   1. - [ ] Get a list of item names for a group by group ID	
-   1. - [ ] Get a list of ID/name pairs for a group by group name
-   1. - [ ] Get a list of ID/name pairs for a group by group ID
-
+   1. - [ ] Get a list of item IDs in a market group by group name
+   1. - [ ] Get a list of item names in a market group by group ID	
+   1. - [ ] Get a list of ID/name pairs in a market group by group name
+   1. - [ ] Get a list of ID/name pairs in a market group by group ID
+1. Market Groups
+   1. - [ ] Get item market group ID for an item by ID 
+   1. - [ ] Get item market group name for an item by ID 
+   1. - [ ] Get item market group ID for an item by name 
+   1. - [ ] Get item market group name for an item by name 
+   1. - [ ] Get item market group ID/name pair for an item by ID 
+   1. - [ ] Get heirarchy of market group IDs for an item by ID 
+   1. - [ ] Get heirarchy of market group names for an item by ID 
+   1. - [ ] Get heirarchy of market group IDs for an item by name 
+   1. - [ ] Get heirarchy of market group names for an item by name 
+   1. - [ ] Get heirarchy of market group ID/name pairs for an item by ID 
+   
+   
 1. Regions
   - [ ] Convert region ID to name
    1. - [ ] Convert region name to ID
@@ -58,10 +66,10 @@ huge treks.
    1. - [ ] Get a list of buy orders for an item ID by region name
    1. - [ ] Get a list of buy orders for an item name by region ID
    1. - [ ] Get a list of buy orders for an item name by region name
-   1. - [ ] Get a list of buy orders for an item group ID by system ID
-   1. - [ ] Get a list of buy orders for an item group ID by system name
-   1. - [ ] Get a list of buy orders for an item group name by system ID
-   1. - [ ] Get a list of buy orders for an item group name by system name
+   1. - [ ] Get a list of buy orders for an item market group ID by system ID
+   1. - [ ] Get a list of buy orders for an item market group ID by system name
+   1. - [ ] Get a list of buy orders for an item market group name by system ID
+   1. - [ ] Get a list of buy orders for an item market group name by system name
 
 1. Market Sell Orders
 
@@ -69,10 +77,10 @@ huge treks.
    1. - [ ] Get a list of sell orders for an item ID by region ID
    1. - [ ] Get a list of sell orders for an item name by region ID
    1. - [ ] Get a list of sell orders for an item name by region name
-   1. - [ ] Get a list of sell orders for an item group ID by system ID
-   1. - [ ] Get a list of sell orders for an item group ID by system name
-   1. - [ ] Get a list of sell orders for an item group name by system ID
-   1. - [ ] Get a list of sell orders for an item group name by system name
+   1. - [ ] Get a list of sell orders for an item market group ID by system ID
+   1. - [ ] Get a list of sell orders for an item market group ID by system name
+   1. - [ ] Get a list of sell orders for an item market group name by system ID
+   1. - [ ] Get a list of sell orders for an item market group name by system name
 
 1. Item Details
 
@@ -82,8 +90,8 @@ huge treks.
    1. - [ ] Get volume of item by name
    1. - [ ] Get description of item by ID
    1. - [ ] Get description of item by name
-   1. - [ ] Get item group of item by ID (redirect to /api/item)
-   1. - [ ] Get item group of item by name
+   1. - [ ] Get item market group of item by ID (redirect to /api/item)
+   1. - [ ] Get item market group of item by name
    1. - [ ] Get skill requirements of item by ID
    1. - [ ] Get skill requirements of item by namy
    1. - [ ] Get manufacturing requirements of item by ID (recursive?)
