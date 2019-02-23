@@ -23,27 +23,40 @@ huge treks.
 #### Basic API endpoints
 
 1. Items
-   1. - [x] Convert item ID to name
-   1. - [x] Convert item name to ID
-   1. - [ ] Get a list of item IDs in a market group by group name
-   1. - [ ] Get a list of item names in a market group by group ID	
-   1. - [ ] Get a list of ID/name pairs in a market group by group name
-   1. - [ ] Get a list of ID/name pairs in a market group by group ID
+   1. getItemName
+      1. - [x] ByItemID
+   1. getItemID
+      1. - [x] ByItemName
+   1. getItemIDs
+      1. - [x] ByMarketGroupID
+      1. - [x] ByMarketGroupName
+   1. getItemNames
+      1. - [x] ByMarketGroupID
+      1. - [x] ByMarketGroupName
+   1. getItems (ID,name) **More information may be provided by this endpoint later**
+      1. - [x] ByMarketGroupID
+      1. - [x] ByMarketGroupName
+
 1. Market Groups
-   1. - [ ] Get item market group ID for an item by ID 
-   1. - [ ] Get item market group name for an item by ID 
-   1. - [ ] Get item market group ID for an item by name 
-   1. - [ ] Get item market group name for an item by name 
-   1. - [ ] Get item market group ID/name pair for an item by ID 
-   1. - [ ] Get heirarchy of market group IDs for an item by ID 
-   1. - [ ] Get heirarchy of market group names for an item by ID 
-   1. - [ ] Get heirarchy of market group IDs for an item by name 
-   1. - [ ] Get heirarchy of market group names for an item by name 
-   1. - [ ] Get heirarchy of market group ID/name pairs for an item by ID 
-   
+   1. getMarketGroupID
+      1. - [x] ByMarketGroupName
+      1. - [x] ByItemID
+      1. - [x] ByItemName
+   1. getMarketGroupName
+      1. - [x] ByMarketGroupID
+      1. - [x] ByItemID
+      1. - [x] ByItemName
+   1. getMarketGroup (ID,name) **More information may be provided by this endpoint later**
+      1. - [x] ByItemID
+      1. - [x] ByItemName
+   1. getMarketGroupHeirarchy
+      1. - [x] ByItemID
+      1. - [x] ByItemName
+      1. - [x] ByMarketGroupID
+      1. - [x] ByMarketGroupName
    
 1. Regions
-  - [ ] Convert region ID to name
+   1. - [ ] Convert region ID to name
    1. - [ ] Convert region name to ID
    1. - [ ] Get adjacent region names for a region by name
    1. - [ ] Get adjacent region IDs for a region by name
