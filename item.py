@@ -14,7 +14,7 @@ SELECT typeName
 FROM invTypes 
 WHERE typeID = %s ;
 '''
-@app.route('/name/byid/<int:itemID>', methods=['GET'])
+@_item.route('/name/byid/<int:itemID>', methods=['GET'])
 def getItemNameByItemID(itemID):
     return dbQuery( q_getItemNameByItemID,(str(itemID),) )
 ###
@@ -25,7 +25,7 @@ SELECT typeID
 FROM invTypes 
 WHERE typeName LIKE %s ;
 '''
-@app.route('/id/byname/<string:itemName>', methods=['GET'])
+@_item.route('/id/byname/<string:itemName>', methods=['GET'])
 def getItemIDByItemName(itemName):
     return dbQuery( q_getItemIDByItemName, (itemName,) )
 ###
@@ -38,7 +38,7 @@ JOIN invMarketGroups AS img
 ON img.marketGroupID = it.marketGroupID
 WHERE img.marketGroupID = %s ;
 '''
-@app.route('/ids/bymarketgroupid/<int:marketGroupID>', methods=['GET'])
+@_item.route('/ids/bymarketgroupid/<int:marketGroupID>', methods=['GET'])
 def getItemIDsByMarketGroupID(marketGroupID):
     return dbQuery( q_getItemIDsByMarketGroupID, (str(marketGroupID),) )
 ###
@@ -51,7 +51,7 @@ JOIN invMarketGroups AS img
 ON img.marketGroupID = it.marketGroupID
 WHERE img.marketGroupName LIKE %s ;
 '''
-@app.route('/ids/bymarketgroupname/<string:marketGroupName>', methods=['GET'])
+@_item.route('/ids/bymarketgroupname/<string:marketGroupName>', methods=['GET'])
 def getItemIDsByMarketGroupName(marketGroupName):
     return dbQuery( q_getItemIDsByMarketGroupName, (marketGroupName,) ) 
 ###
@@ -62,7 +62,7 @@ SELECT it.typeName
 FROM invTypes AS it
 WHERE it.marketGroupID = %s ;
 '''
-@app.route('/names/bymarketgroupid/<int:marketGroupID>', methods=['GET'])
+@_item.route('/names/bymarketgroupid/<int:marketGroupID>', methods=['GET'])
 def getItemNamesByMarketGroupID(marketGroupID):
     return dbQuery( q_getItemNamesByMarketGroupID, (str(marketGroupID),) )
 ###
@@ -75,7 +75,7 @@ JOIN invMarketGroups AS img
 ON it.marketGroupID = img.marketGroupID
 WHERE img.marketGroupName LIKE %s ;
 '''
-@app.route('/names/bymarketgroupname/<string:marketGroupName>', methods=['GET'])
+@_item.route('/names/bymarketgroupname/<string:marketGroupName>', methods=['GET'])
 def getItemNamesByMarketGroupName(marketGroupName):
     return dbQuery( q_getItemNamesByMarketGroupName, (marketGroupName,) )
 ###
@@ -86,7 +86,7 @@ SELECT it.typeID,it.typeName
 FROM invTypes AS it
 WHERE it.marketGroupID = %s ;
 '''
-@app.route('/list/bymarketgroupid/<int:marketGroupID>', methods=['GET'])
+@_item.route('/list/bymarketgroupid/<int:marketGroupID>', methods=['GET'])
 def getItemsByMarketGroupID(marketGroupID):
     return dbQuery( q_getItemsByMarketGroupID, (str(marketGroupID),) ) 
 ###
@@ -99,7 +99,7 @@ JOIN invMarketGroups AS img
 ON img.marketGroupID = it.marketGroupID
 WHERE img.marketGroupName LIKE %s ;
 '''
-@app.route('/list/bymarketgroupname/<string:marketGroupName>', methods=['GET'])
+@_item.route('/list/bymarketgroupname/<string:marketGroupName>', methods=['GET'])
 def getItemsByMarketGroupName(marketGroupName)
     return dbQuery( q_getItemsByMarketGroupName, (str(marketGroupID),) ) 
 #############
