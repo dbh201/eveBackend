@@ -21,6 +21,7 @@ huge treks.
 
 ## TODO:
 #### Basic API endpoints
+###### Use blueprints / separate api parts into files
 
 1. Items
    1. getItemName
@@ -56,57 +57,97 @@ huge treks.
       1. - [x] ByMarketGroupName
    
 1. Regions
-   1. - [ ] Convert region ID to name
-   1. - [ ] Convert region name to ID
-   1. - [ ] Get adjacent region names for a region by name
-   1. - [ ] Get adjacent region IDs for a region by name
-   1. - [ ] Get adjacent region ID/name pairs for a region by name
-   1. - [ ] Get adjacent region names for a region by ID
-   1. - [ ] Get adjacent region IDs for a region by ID
-   1. - [ ] Get adjacent region ID/name pairs for a region by ID
-   1. - [ ] Get list of system IDs for a region by ID
-   1. - [ ] Get list of system names for a region by ID
-   1. - [ ] Get list of system ID/name pairs for a region by ID
+   1. getRegionID
+      1. - [x] ByRegionName
+   1. getRegionName
+      1. - [x] ByRegionID
+   1. getAdjacentRegionNames
+      1. - [x] ByRegionName
+      1. - [x] ByRegionID
+   1. getAdjacentRegionIDs
+      1. - [x] ByRegionName
+      1. - [x] ByRegionID
+   1. getAdjacentRegions
+      1. - [x] ByRegionName
+      1. - [x] ByRegionID
 
 1. Systems
-
-   1. - [ ] Convert system ID to name
-   1. - [ ] Convert system name to ID
+   1. getSystemID
+      1. - [ ] BySystemName
+   1. getSystemName
+      1. - [ ] BySystemID
+   1. getSystemIDs
+      1. - [ ] ByRegionID
+      1. - [ ] ByRegionName
+   1. getSystemNames
+      1. - [ ] ByRegionID
+      1. - [ ] ByRegionName
+   1. getSystems
+      1. - [ ] ByRegionID
+      1. - [ ] ByRegionName
 
 1. Market Buy Orders
-
-   1. - [ ] Get a list of buy orders for an item ID by region ID
-   1. - [ ] Get a list of buy orders for an item ID by region name
-   1. - [ ] Get a list of buy orders for an item name by region ID
-   1. - [ ] Get a list of buy orders for an item name by region name
-   1. - [ ] Get a list of buy orders for an item market group ID by system ID
-   1. - [ ] Get a list of buy orders for an item market group ID by system name
-   1. - [ ] Get a list of buy orders for an item market group name by system ID
-   1. - [ ] Get a list of buy orders for an item market group name by system name
+   1. getBuyOrders
+      1. ForItemID
+         1. - [ ] ByRegionID
+         1. - [ ] ByRegionName
+      1. ForItemName
+         1. - [ ] ByRegionID
+         1. - [ ] ByRegionName
+      1. ForMarketGroupID
+         1. - [ ] ByRegionID
+         1. - [ ] ByRegionName
+      1. ForMarketGroupName
+         1. - [ ] ByRegionID
+         1. - [ ] ByRegionName
 
 1. Market Sell Orders
-
-   1. - [ ] Get a list of sell orders for an item ID by region name
-   1. - [ ] Get a list of sell orders for an item ID by region ID
-   1. - [ ] Get a list of sell orders for an item name by region ID
-   1. - [ ] Get a list of sell orders for an item name by region name
-   1. - [ ] Get a list of sell orders for an item market group ID by system ID
-   1. - [ ] Get a list of sell orders for an item market group ID by system name
-   1. - [ ] Get a list of sell orders for an item market group name by system ID
-   1. - [ ] Get a list of sell orders for an item market group name by system name
+   1. getSellOrders
+      1. ForItemID
+         1. - [ ] ByRegionID
+         1. - [ ] ByRegionName
+      1. ForItemName
+         1. - [ ] ByRegionID
+         1. - [ ] ByRegionName
+      1. ForMarketGroupID
+         1. - [ ] ByRegionID
+         1. - [ ] ByRegionName
+      1. ForMarketGroupName
+         1. - [ ] ByRegionID
+         1. - [ ] ByRegionName
 
 1. Item Details
-
-   1. - [ ] Get a list of item details for an item ID
-   1. - [ ] Get a list of item details for an item name
-   1. - [ ] Get volume of item by ID
-   1. - [ ] Get volume of item by name
-   1. - [ ] Get description of item by ID
-   1. - [ ] Get description of item by name
-   1. - [ ] Get item market group of item by ID (redirect to /api/item)
-   1. - [ ] Get item market group of item by name
-   1. - [ ] Get skill requirements of item by ID
-   1. - [ ] Get skill requirements of item by namy
-   1. - [ ] Get manufacturing requirements of item by ID (recursive?)
-   1. - [ ] Get manufacturing requirements of item by name (recursive?)
+   1. getItemDetails
+      1. - [ ] ByItemID
+      1. - [ ] ByItemName
+   1. getItemVolume
+      1. - [ ] ByItemID
+      1. - [ ] ByItemName
+   1. getItemDescription
+      1. - [ ] ByItemID
+      1. - [ ] ByItemName
+   1. Get description of item by ID
+      1. - [ ] ByItemID
+      1. - [ ] ByItemName
+   1. Get description of item by name
+      1. - [ ] ByItemID
+      1. - [ ] ByItemName
+   1. Get item market group of item by ID (redirect to /api/item)
+      1. - [ ] ByItemID
+      1. - [ ] ByItemName
+   1. Get item market group of item by name
+      1. - [ ] ByItemID
+      1. - [ ] ByItemName
+   1. Get skill requirements of item by ID
+      1. - [ ] ByItemID
+      1. - [ ] ByItemName
+   1. Get skill requirements of item by namy
+      1. - [ ] ByItemID
+      1. - [ ] ByItemName
+   1. Get manufacturing requirements of item by ID 
+      1. - [ ] ByItemID
+      1. - [ ] ByItemName
+   1. Get manufacturing requirements of item by name (recursive?)
+      1. - [ ] ByItemID
+      1. - [ ] ByItemName
 	
