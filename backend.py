@@ -375,10 +375,11 @@ def getAdjacentRegionIDsByRegionID):
 
 @app.route('/api/market/<int:regionID>/<int:itemID>', methods=['GET'])
 def getItemPrices(regionID,itemID):
-    
     esi.request('GET',ESI+'/markets/%i/orders/?datasource=tranquility&order_type=all&page=1&type_id=%i'%(regionID,itemID))
     a=esi.getresponse().read()
     return a
+################
 
 if __name__ == '__main__':
     app.run(debug=False)
+
