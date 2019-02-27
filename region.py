@@ -55,7 +55,7 @@ JOIN mapRegions AS t
 ON t.regionID = adj.toRegionID
 WHERE f.regionID = %s ;
 '''
-@_region.route'/adjacentnames/byid/<int:regionID>',  methods=['GET'])
+@_region.route('/adjacentnames/byid/<int:regionID>',  methods=['GET'])
 def getAdjacentRegionNamesByRegionID(regionID):
     return dbQuery( q_getAdjacentRegionNamesByRegionID, (str(regionID),) )
 ###
