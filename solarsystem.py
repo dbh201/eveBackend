@@ -1,11 +1,11 @@
-from flask impot Blueprint
+from flask import Blueprint
 from db import dbQuery
 
 #####################
 # /api/solarsystem/ #
 #####################
 
-_system = BluePrint('_solarSystem',__name__)
+_solarsystem = BluePrint('_solarSystem',__name__)
 _prefix = '/api/solarsystem'
 
 ###
@@ -14,7 +14,7 @@ SELECT solarSystemID
 FROM mapSolarSystems
 WHERE solarSystemName LIKE %s ;
 '''
-@_system.route('/id/byname/<string:solarSystemName>', methods=['GET'])
+@_solarsystem.route('/id/byname/<string:solarSystemName>', methods=['GET'])
 def getSolarSystemIDBySolarSystemName(solarSystemName):
     return dbQuery( q_getSystemIDBySystemName, (solarSystemName,) )
 ###
@@ -25,7 +25,7 @@ SELECT solarSystemName
 FROM mapSolarSystems
 WHERE solarSystemID = %s ;
 '''
-@_system.route('/name/byid/<int:solarSystemID>', methods=['GET'])
+@_solarsystem.route('/name/byid/<int:solarSystemID>', methods=['GET'])
 def getSolarSystemNameBySolarSystemID(solarSystemID):
     return dbQuery( q_getSystemNameBySystemID, (str(solarSystemID),) )
 ###
@@ -36,7 +36,7 @@ SELECT solarSystemID
 FROM mapSolarSystems
 WHERE regionID = %s ;
 '''
-@_system.route('/ids/byregionid/<int:regionID>', methods=['GET'])
+@_solarsystem.route('/ids/byregionid/<int:regionID>', methods=['GET'])
 def getSolarSystemIDsByRegionID(regionID):
     return dbQuery( q_getSolarSystemIDsByRegionID, (str(regionID),) )
 ###
@@ -49,7 +49,7 @@ JOIN mapRegions AS mr
 ON mss.regionID = mr.regionID
 WHERE mr.regionName LIKE %s ;
 '''
-@_system.route('/ids/byregionname/<string:regionName>', methods=['GET'])
+@_solarsystem.route('/ids/byregionname/<string:regionName>', methods=['GET'])
 def getSolarSystemIDsByRegionName():
     return dbQuery( q_getSolarSystemIDsByRegionName, (str(regionName),) )
 ###
@@ -59,7 +59,7 @@ SELECT solarSystemName
 FROM mapSolarSystems
 WHERE regionID = %s ;
 '''
-@_system.route('/names/byregionid/<int:regionID>', methods=['GET'])
+@_solarsystem.route('/names/byregionid/<int:regionID>', methods=['GET'])
 def getSolarSystemNamesByRegionID(regionID):
     return dbQuery( q_getSolarSystemNamesByRegionID, (str(),) )
 ###
@@ -71,7 +71,7 @@ JOIN mapRegions AS mr
 ON mss.regionID = mr.regionID
 WHERE mr.regionName LIKE %s ;
 '''
-@_system.route('/names/byregionname/<string:regionName>', methods=['GET'])
+@_solarsystem.route('/names/byregionname/<string:regionName>', methods=['GET'])
 def getSolarSystemNamesByRegionName(regionName):
     return dbQuery( q_getSolarSystemNamesByRegionName, (str(regionName),) )
 ###
@@ -81,7 +81,7 @@ SELECT solarSystemName,solarSystemID
 FROM mapSolarSystems AS mss
 WHERE regionID = %s ;
 '''
-@_system.route('/byregionid/<int:regionID>', methods=['GET'])
+@_solarsystem.route('/byregionid/<int:regionID>', methods=['GET'])
 def getSolarSystemsByRegionID(regionID):
     return dbQuery( q_getSolarSystemsByRegionID, (str(regionID),) )
 ###
@@ -93,7 +93,7 @@ JOIN mapRegions AS mr
 ON mss.regionID = mr.regionID
 WHERE mr.regionName LIKE %s ;
 '''
-@_system.route('/byregionname/<string:regionName', methods=['GET'])
+@_solarsystem.route('/byregionname/<string:regionName', methods=['GET'])
 def getSolarSystemsByRegionName(regionName):
     return dbQuery( q_getSolarSystemsByRegionName, (str(regionName),) )
 ###
