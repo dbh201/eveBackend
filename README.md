@@ -73,18 +73,18 @@ huge treks.
 
 1. Systems
    1. getSystemID
-      1. - [ ] BySystemName
+      1. - [x] BySystemName
    1. getSystemName
-      1. - [ ] BySystemID
+      1. - [x] BySystemID
    1. getSystemIDs
-      1. - [ ] ByRegionID
-      1. - [ ] ByRegionName
+      1. - [x] ByRegionID
+      1. - [x] ByRegionName
    1. getSystemNames
-      1. - [ ] ByRegionID
-      1. - [ ] ByRegionName
+      1. - [x] ByRegionID
+      1. - [x] ByRegionName
    1. getSystems
-      1. - [ ] ByRegionID
-      1. - [ ] ByRegionName
+      1. - [x] ByRegionID
+      1. - [x] ByRegionName
 
 1. Market Buy Orders
    1. getBuyOrders
