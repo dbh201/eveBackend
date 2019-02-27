@@ -89,32 +89,32 @@ huge treks.
 1. Market Buy Orders
    1. getBuyOrders
       1. ForItemID
-         1. - [ ] ByRegionID
-         1. - [ ] ByRegionName
+         1. - [x] ByRegionID
+         1. - [x] ByRegionName
       1. ForItemName
-         1. - [ ] ByRegionID
-         1. - [ ] ByRegionName
+         1. - [x] ByRegionID
+         1. - [x] ByRegionName
       1. ForMarketGroupID
-         1. - [ ] ByRegionID
-         1. - [ ] ByRegionName
+         1. - [x] ByRegionID
+         1. - [x] ByRegionName
       1. ForMarketGroupName
-         1. - [ ] ByRegionID
-         1. - [ ] ByRegionName
+         1. - [x] ByRegionID
+         1. - [x] ByRegionName
 
 1. Market Sell Orders
    1. getSellOrders
       1. ForItemID
-         1. - [ ] ByRegionID
-         1. - [ ] ByRegionName
+         1. - [x] ByRegionID
+         1. - [x] ByRegionName
       1. ForItemName
-         1. - [ ] ByRegionID
-         1. - [ ] ByRegionName
+         1. - [x] ByRegionID
+         1. - [x] ByRegionName
       1. ForMarketGroupID
-         1. - [ ] ByRegionID
-         1. - [ ] ByRegionName
+         1. - [x] ByRegionID
+         1. - [x] ByRegionName
       1. ForMarketGroupName
-         1. - [ ] ByRegionID
-         1. - [ ] ByRegionName
+         1. - [x] ByRegionID
+         1. - [x] ByRegionName
 
 1. Item Details
    1. getItemDetails
