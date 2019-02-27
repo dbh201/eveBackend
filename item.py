@@ -6,7 +6,7 @@ from db import dbQuery
 #############
 
 _item = Blueprint('_item',__name__)
-_prefix = '/api/item'
+_prefix = '/item'
 
 ###
 q_getItemNameByItemID='''

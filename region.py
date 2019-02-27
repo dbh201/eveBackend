@@ -6,7 +6,7 @@ from db import dbQuery
 ###############
 
 _region = Blueprint('_region',__name__)
-_prefix = '/api/region'
+_prefix = '/region'
 
 ###
 q_getRegionIDByRegionName='''

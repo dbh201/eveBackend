@@ -6,7 +6,7 @@ from db import dbQuery
 ####################
 
 _marketGroup= Blueprint('_marketGroup', __name__)
-_prefix='/api/marketgroup'
+_prefix='/marketgroup'
 
 ###
 q_getMarketGroupIDByMarketGroupName='''

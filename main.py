@@ -2,9 +2,7 @@ from flask import Flask,abort,jsonify
 import mysql.connector
 import http.client
 
-import marketgroup as mg
-import item as it
-import market as mk
+import blueprints
 
 # IMPORTANT NOTES:
 # in the SDE, items (inventory items) information
@@ -21,9 +19,8 @@ import market as mk
 
 app = Flask(__name__)
 
-app.register_blueprint(mg._marketGroup,url_prefix=mg._prefix)
-app.register_blueprint(it._item,url_prefix=it._prefix)
-app.register_blueprint(mk._market,url_prefix=mk._prefix)
+app.register_blueprint(blueprints._api,url_prefix=blueprints._prefix)
+
 
 @app.route('/')
 def index():

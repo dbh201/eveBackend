@@ -5,8 +5,8 @@ from db import dbQuery
 # /api/solarsystem/ #
 #####################
 
-_solarsystem = BluePrint('_solarSystem',__name__)
-_prefix = '/api/solarsystem'
+_solarsystem = Blueprint('_solarSystem',__name__)
+_prefix = '/solarsystem'
 
 ###
 q_getSolarSystemIDBySolarSystemName='''
