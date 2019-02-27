@@ -15,7 +15,7 @@ API = http.client.HTTPSConnection("localhost")
 # inventory items
 
 _market = Blueprint('_market',__name__)
-_prefix = '/api/market'
+_prefix = '/market'
 
 ###
 @_market.route('/buys/<int:regionID>/<int:itemID>/<int:pageNum>', methods=['GET'])
