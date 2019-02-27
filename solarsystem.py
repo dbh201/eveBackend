@@ -93,7 +93,7 @@ JOIN mapRegions AS mr
 ON mss.regionID = mr.regionID
 WHERE mr.regionName LIKE %s ;
 '''
-@_solarsystem.route('/byregionname/<string:regionName', methods=['GET'])
+@_solarsystem.route('/byregionname/<string:regionName>', methods=['GET'])
 def getSolarSystemsByRegionName(regionName):
     return dbQuery( q_getSolarSystemsByRegionName, (str(regionName),) )
 ###

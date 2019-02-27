@@ -18,8 +18,7 @@ import blueprints
 # this script will use the convention item (inventory) and object (space)
 
 app = Flask(__name__)
-
-app.register_blueprint(blueprints._api,url_prefix=blueprints._prefix)
+blueprints.register_all(app)
 
 
 @app.route('/')
