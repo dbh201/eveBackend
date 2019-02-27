@@ -100,6 +100,6 @@ ON img.marketGroupID = it.marketGroupID
 WHERE img.marketGroupName LIKE %s ;
 '''
 @_item.route('/list/bymarketgroupname/<string:marketGroupName>', methods=['GET'])
-def getItemsByMarketGroupName(marketGroupName)
+def getItemsByMarketGroupName(marketGroupName):
     return dbQuery( q_getItemsByMarketGroupName, (str(marketGroupID),) ) 
 #############
