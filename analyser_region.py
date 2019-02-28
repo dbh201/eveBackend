@@ -6,8 +6,10 @@ class AnalyserRegion():
         self.rName=rName
         self.rTypes=rTypes
         self.rBuys={}
+        self.rLastBuysUpdate=0
         self.rSells={}
-        self.rLastUpdate=0
+        self.rLastSellsUpdate=0
+        self.rLastTypesUpdate=0
 
     def lowestSell(self,itemID):
         s=self.rSells[0]
@@ -25,7 +27,7 @@ class AnalyserRegion():
 
     def setTypes(self,rTypes):
         self.rTypes=rTypes
-        self.rLastUpdate=time()
+        self.rLastTypesUpdate=time()
 
     def __eq__(self,other):
         if type(other) == int:
