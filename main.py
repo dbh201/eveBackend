@@ -1,8 +1,8 @@
 from flask import Flask,abort,jsonify
 import mysql.connector
 import http.client
-import analysis
 import blueprints
+import atexit
 
 # IMPORTANT NOTES:
 # in the SDE, items (inventory items) information
@@ -18,10 +18,13 @@ import blueprints
 # this script will use the convention item (inventory) and object (space)
 
 app = Flask(__name__)
-a = analysis.Analyser()
-
+with app.app_context():
+    import analyser_thread as athread
+    athread.analyser = athread.Analyser()
+    athread.analyser.start()
+    atexit.register(athread.analyser.terminate())
+    print(athread.analyser.regions)
 blueprints.register_all(app)
-a.start()
 
 
 @app.route('/')
@@ -29,4 +32,4 @@ def index():
     return 'This is a local REST endpoint for the SDE database.'
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
