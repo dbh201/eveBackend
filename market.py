@@ -1,7 +1,8 @@
 from flask import Blueprint
 import http.client
 from esi import ESI,ESI_VERSION
-from region import getRegionIDByRegionName,getItemIDByItemName
+from region import getRegionIDByRegionName
+from item import getItemIDByItemName
 API = http.client.HTTPSConnection("localhost")
 # IMPORTANT NOTES:
 # in the SDE, items (inventory items) information
