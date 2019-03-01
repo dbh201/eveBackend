@@ -1,5 +1,49 @@
-import http.client
+import httpcache
+import requests
+import threading
+from time import sleep
 
-ESI_URL = "esi.evetech.net"
-ESI_VERSION="/latest"
-ESI = http.client.HTTPSConnection(ESI_URL)
+class ESIConnection(threading.Thread):
+    ESI_PROTO = "https://"
+    ESI_URL = "esi.evetech.net"
+    ESI_VERSION="/latest"
+
+    def __init__(self):
+        super(ESIConnection,self).__init__()
+        from httpcache import CachingHTTPAdapter
+        self.c = requests.Session()
+        self.c.mount("https://", CachingHTTPAdapter())
+        self.c.mount("http://", CachingHTTPAdapter())
+        self.term = threading.Event()
+
+    def getJSONResp(self,req):
+        try:
+            if not req[0] == '/':
+                req = '/' + req
+            req=ESI_PROTO+ESI_URL+ESI_VERSION+req
+            resp = self.c.get(req)
+            resp.raise_for_status()
+            return resp.json()
+
+        except HTTPError as httpe:
+            print("HTTPError on request %s:\n%s" 
+                    % (req,str(httpe)))
+            return []
+        except ConnectionError as ce:
+            print("ConnectionErrer on request %s:\n%s"
+                    % (req,str(ce)))
+            return []
+
+        except ValueError as jde:
+            print("ValueError on request %s:\n%s"
+                    % (req, jde.msg))
+            return []
+
+    def run(self):
+        while not self.term.is_set():
+            sleep(0.1)
+        print("ESI thread terminated.")
+
+    def terminate(self):
+        print("Asking ESI thread to terminate...")
+        self.term.set()
