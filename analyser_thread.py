@@ -1,26 +1,30 @@
 import threading
-from esi import ESI_VERSION,ESI_URL
+import esi
 from region import getRegionIDByRegionName,getRegionNameByRegionID
 from http.client import HTTPSConnection
-from time import time,sleep
+#from time import time,sleep
+def time():
+    return 0
+from time import sleep
 from analyser_region import AnalyserRegion
+from json import loads
 
 DEFAULT_REGION="Verge Vendor"
 
 class Analyser(threading.Thread):
     def __init__(self):
         super(Analyser,self).__init__()
-        self.c = HTTPSConnection(ESI_URL)
+        self.c = esi.ESIConnection()
         
         #list of AnalyserRegion
         self.regions=dict() #not sync'd yet
-        rID=getRegionIDByRegionName(DEFAULT_REGION).get_json()[0][0]
+        rID=getRegionIDByRegionName(DEFAULT_REGION)[0][0]
         self.regions[rID]=AnalyserRegion(rID,DEFAULT_REGION,[])
 
         self.updatePeriod=5*60
         self.typesUpdatePeriod=10*60
         self.lastTypesUpdate=0
-        self.term=False
+        self.term=threading.Event()
 
     def addRegion(self,regionID):
         regionName=getRegionNameByRegionID(regionID)
@@ -30,13 +34,13 @@ class Analyser(threading.Thread):
                 []
                 )
     def terminate(self):
-        self.term=True
-        print("Asking the analyser thread to terminate")
+        print("Asking the analyser thread to terminate...")
+        self.term.set()
     def removeRegion(self,regionID):
         self.regions.pop(regionID)
 
     def updateAdjacentRegions(self):
-        newRegions=getAdjacentRegionIDsByRegionID(self.regionID).get_json()
+        newRegions=getAdjacentRegionIDsByRegionID(self.regionID)
         for i in self.regions:
             if not i in newRegions:
                 self.removeRegion(int(i))
@@ -47,13 +51,12 @@ class Analyser(threading.Thread):
     def run(self):
         print("Thread started.")
         print("Regions: %s" % (str(self.regions)))
-        while not self.term:
+        while not self.term.is_set():
             if(self.lastTypesUpdate + self.typesUpdatePeriod < time()):
                 print("Updating type information for regions")
                 self.updateAllRelevantTypes()
                 self.lastTypesUpdate=time()
             for region in self.regions:
-                print("Testing region %s" % (self.regions[region]))
                 if(self.regions[region].rLastBuysUpdate + self.updatePeriod < time()):
                     print("Updating region buys %s" % (self.regions[region]))
                     self.ESIUpdateBuyOrders(region)
@@ -63,7 +66,7 @@ class Analyser(threading.Thread):
                     self.ESIUpdateSellOrders(region)
                     self.regions[region].rLastSellsUpdate=time() 
             sleep(1)
-        print("Analyser thread terminated successfully")
+        print("Analyser thread terminated.")
 
     def updateAllRelevantTypes(self):
         for i in self.regions:
@@ -74,8 +77,7 @@ class Analyser(threading.Thread):
     def ESIUpdateRelevantTypes(self,regionID):
         esiRelevant='/markets/%i/types/'
         print("Requesting type list for %s" % (regionID))
-        self.c.request('GET',ESI_VERSION + (esiRelevant % (regionID)) )
-        r=self.c.getresponse().read()
+        r=self.c.getJSONResp( esiRelevant % (regionID) )
         print("Returned %s" % (r))
         return r
 
@@ -97,18 +99,13 @@ class Analyser(threading.Thread):
 
     def ESIUpdateOrders(self,regionID,order_type):
         for item in self.regions[regionID].rTypes:
+            print("Updating item %i for %s" % (item, self.regions[regionID]))
             p=1
             while True:
                 esiOrders='/markets/%i/orders/?datasource=tranquility&order_type=%s&page=1&type_id=%i'
-                self.c.request('GET',ESI_VERSION+(esiOrders % (regionID,order_type,item)))
-                resp = self.c.getresponse()
-                r=resp.read()
-                if not resp.code == 200:
-                    print("%s returned %i" % (esiOrders % (regionID,order_type,item),r.code))
-                    break
+                r=self.c.getJSONResp(esiOrders % (regionID,order_type,item))
                 if len(r) == 0:
                     break
                
                 self.regions[regionID].rBuys[item]+=r
                 p+=1
-global analyser
