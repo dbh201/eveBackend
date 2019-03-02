@@ -36,10 +36,10 @@ def create_app():
             print("analyser timed out. :(")
 
     def start_all():
-        app.analyser = analyser_thread.Analyser()
-        app.analyser.start()
         app.ESI = esi.ESIConnection()
         app.ESI.start()
+        app.analyser = analyser_thread.Analyser(app.ESI)
+        app.analyser.start()
 
     start_all()
     atexit.register(stop_all)
