@@ -1,3 +1,4 @@
+from importlib import reload
 from flask import Flask,abort,jsonify,request
 import blueprints
 import atexit
@@ -50,5 +51,14 @@ app = create_app()
 def index():
     return "API Status:<br/>ESI Thread: %s<br/>Analyser Thread: %s" % (app.ESI.is_alive(),app.analyser.is_alive())
 
+@app.route('/reload_analyser')
+def reload_analyser():
+    app.analyser.terminate()
+    app.analyser.join(10)
+    reload(analyser_thread)
+    app.analyser = analyser_thread.Analyser(app.ESI)
+    app.analyser.start()
+    return "System reloaded.<br/>" + index()
+
 if __name__ == '__main__':
-    app.run(debug=True,threaded=False)
+    app.run(debug=False,threaded=False)
