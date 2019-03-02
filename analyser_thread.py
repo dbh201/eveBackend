@@ -12,10 +12,9 @@ from json import loads
 DEFAULT_REGION="Verge Vendor"
 
 class Analyser(threading.Thread):
-    def __init__(self):
+    def __init__(self,esicon):
         super(Analyser,self).__init__()
-        self.c = esi.ESIConnection()
-        
+        self.c=esicon
         #list of AnalyserRegion
         self.regions=dict() #not sync'd yet
         rID=getRegionIDByRegionName(DEFAULT_REGION)[0][0]
