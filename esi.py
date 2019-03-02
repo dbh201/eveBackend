@@ -13,8 +13,8 @@ class ESIConnection(threading.Thread):
         super(ESIConnection,self).__init__()
         from httpcache import CachingHTTPAdapter
         self.c = requests.Session()
-        self.c.mount("https://", CachingHTTPAdapter())
-        self.c.mount("http://", CachingHTTPAdapter())
+        self.c.mount("https://", CachingHTTPAdapter(capacity=1000000))
+        self.c.mount("http://", CachingHTTPAdapter(capacity=1000000))
         self.term = threading.Event()
         self.reqlist = []
         self.resplist = {}
@@ -65,8 +65,9 @@ class ESIConnection(threading.Thread):
                 for i in self.reqlist:
                     i[2] = self.processRequest(i[0])
                     i[1].set()
+                    sleep(0.2)
             else:
-                sleep(0.1)
+                sleep(0.2)
         print("ESI thread terminated.")
 
     def terminate(self):
