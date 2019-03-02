@@ -2,9 +2,7 @@ import threading
 import esi
 from region import getRegionIDByRegionName,getRegionNameByRegionID
 from http.client import HTTPSConnection
-#from time import time,sleep
-def time():
-    return 0
+from time import time,sleep
 from time import sleep
 from analyser_region import AnalyserRegion
 from json import loads
@@ -83,28 +81,24 @@ class Analyser(threading.Thread):
     def ESIUpdateBuyOrders(self,regionID):
         if not self.regions[regionID].rBuys:
             self.regions[regionID].rBuys={}
-        for item in self.regions[regionID].rTypes:
-            if not item in self.regions[regionID].rBuys:
-                self.regions[regionID].rBuys[item]=[]
-        return self.ESIUpdateOrders(regionID,"buy")
+        return self.ESIUpdateOrders(regionID,"buy",self.regions[regionID].rBuys)
 
     def ESIUpdateSellOrders(self,regionID):
         if not self.regions[regionID].rSells:
             self.regions[regionID].rBuys={}
-        for item in self.regions[regionID].rTypes:
-            if not item in self.regions[regionID].rSells:
-                self.regions[regionID].rSells=[]
-        return self.ESIUpdateOrders(regionID,"sell")
+        return self.ESIUpdateOrders(regionID,"sell",self.regions[regionID].rSells)
 
-    def ESIUpdateOrders(self,regionID,order_type):
+    def ESIUpdateOrders(self,regionID,order_type,dest_dict):
         for item in self.regions[regionID].rTypes:
             print("Updating item %i for %s" % (item, self.regions[regionID]))
             p=1
-            while True:
-                esiOrders='/markets/%i/orders/?datasource=tranquility&order_type=%s&page=1&type_id=%i'
-                r=self.c.getJSONResp(esiOrders % (regionID,order_type,item))
+            while not self.term.is_set():
+                esiOrders='/markets/%i/orders/?datasource=tranquility&order_type=%s&page=%i&type_id=%i'
+                r=self.c.getJSONResp(esiOrders % (regionID,order_type,p,item))
+                print("Retrieved page %i of length %i:\n%s" % (p,len(r),r))
                 if len(r) == 0:
                     break
-               
-                self.regions[regionID].rBuys[item]+=r
+                if not item in dest_dict:
+                    dest_dict[item]=[]
+                dest_dict[item]+=r
                 p+=1
