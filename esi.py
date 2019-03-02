@@ -15,8 +15,27 @@ class ESIConnection(threading.Thread):
         self.c.mount("https://", CachingHTTPAdapter())
         self.c.mount("http://", CachingHTTPAdapter())
         self.term = threading.Event()
+        self.reqlist = []
+        self.resplist = {}
+        self.resplistlock = threading.Lock()
+        self.nonce = 0
+        self.reqlistlock = threading.Lock()
+
+    def getNonce(self):
+        self.nonce+=1
+        return self.nonce
 
     def getJSONResp(self,req):
+        r = ( req, threading.Event(), None )
+
+        self.reqlistlock.acquire()
+        self.reqlist.append( r )
+        self.reqlistlock.release()
+
+        r[1].wait()
+        return r[2]
+
+    def processRequest(self,req):
         try:
             if not req[0] == '/':
                 req = '/' + req
@@ -30,7 +49,7 @@ class ESIConnection(threading.Thread):
                     % (req,str(httpe)))
             return []
         except ConnectionError as ce:
-            print("ConnectionErrer on request %s:\n%s"
+            print("ConnectionError on request %s:\n%s"
                     % (req,str(ce)))
             return []
 
@@ -41,7 +60,12 @@ class ESIConnection(threading.Thread):
 
     def run(self):
         while not self.term.is_set():
-            sleep(0.1)
+            if(len(self.reqlist)>0):
+                for i in self.reqlist:
+                    i[2] = self.processRequest(i[0])
+                    i[1].set()
+            else:
+                sleep(0.1)
         print("ESI thread terminated.")
 
     def terminate(self):
