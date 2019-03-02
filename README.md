@@ -18,7 +18,6 @@ For each disparity, it should be able to calculate the most profitable
 buy and sell pair using ISK/jump, required collateral, volume, and 
 low-sec risk. Limits for the jump count should be an option to avoid
 huge treks.
-
 ## TODO:
 #### Basic API endpoints
 ###### Use blueprints / separate api parts into files
@@ -153,24 +152,24 @@ huge treks.
 	
 #### API Calculations
 1. ESI Connection (thread)
-   1. - [ ] Transparent connection to ESI with a single connection for entire app
-   1. - [ ] Cached results with HTTP 304 support
+   1. - [x] Transparent connection to ESI with a single connection for entire app
+   1. - [x] Cached results with HTTP 304 support
 	    This should be used as the primary caching mechanism. Caching should
 	    persist between app restarts.
    1. - [ ] Recovery from exceptions without thread termination
-   1. - [ ] Graceful thread termination on exit
+   1. - [x] Graceful thread termination on exit
 1. Market Orders (thread)
    1. For each region:
-      1. - [ ] Get all relevant types through ESI Connection
+      1. - [x] Get all relevant types through ESI Connection
       1. - [ ] Get daily stats for each type through ESI Connection
       1. - [ ] Recover for exceptions without crashing
    1. For each type:
+      1. - [x] Collect the buy and sell orders for each region
       1. Find best x buy-sell pairs with the following considerations:
          1. - [ ] Fewest jumps
          1. - [ ] Minimum collateral % of profit
          1. - [ ] Max profit per cubic metre
 	 Basically, the trade with the most profit in the fewest jumps with the
          least collateral should be at the top of the calculated list.
-
 	 Also, this calculation should do both intra and inter region trades.
 
