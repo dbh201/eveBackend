@@ -3,10 +3,11 @@ import requests
 import threading
 from time import sleep
 
+ESI_PROTO = "https://"
+ESI_URL = "esi.evetech.net"
+ESI_VERSION="/latest"
+
 class ESIConnection(threading.Thread):
-    ESI_PROTO = "https://"
-    ESI_URL = "esi.evetech.net"
-    ESI_VERSION="/latest"
 
     def __init__(self):
         super(ESIConnection,self).__init__()
@@ -26,7 +27,7 @@ class ESIConnection(threading.Thread):
         return self.nonce
 
     def getJSONResp(self,req):
-        r = ( req, threading.Event(), None )
+        r = [ req, threading.Event(), None ]
 
         self.reqlistlock.acquire()
         self.reqlist.append( r )
@@ -44,7 +45,7 @@ class ESIConnection(threading.Thread):
             resp.raise_for_status()
             return resp.json()
 
-        except HTTPError as httpe:
+        except requests.HTTPError as httpe:
             print("HTTPError on request %s:\n%s" 
                     % (req,str(httpe)))
             return []
