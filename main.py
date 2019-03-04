@@ -49,16 +49,18 @@ def create_app():
 app = create_app()
 @app.route('/')
 def index():
-    return "API Status:<br/>ESI Thread: %s<br/>Analyser Thread: %s" % (app.ESI.is_alive(),app.analyser.is_alive())
+    return "API Status:<br/>ESI Thread: %s, <br/>Analyser Thread: %s, %s" % (
+    "Started" if app.ESI.is_alive() else "Stopped",
+    "Started" if app.analyser.is_alive() else "Stopped",
+    app.analyser.status() )
 
-@app.route('/reload_analyser')
-def reload_analyser():
-    app.analyser.terminate()
-    app.analyser.join(10)
-    reload(analyser_thread)
-    app.analyser = analyser_thread.Analyser(app.ESI)
-    app.analyser.start()
-    return "System reloaded.<br/>" + index()
-
+@app.route('/suspend')
+def suspend():
+    app.analyser.pause()
+    return "Suspended analyser."
+@app.route('/resume')
+def resume():
+    app.analyser.resume()
+    return "Resumed analyser."
 if __name__ == '__main__':
     app.run(debug=False,threaded=False)
