@@ -63,6 +63,8 @@ class ESIConnection(threading.Thread):
         while not self.term.is_set():
             if(len(self.reqlist)>0):
                 for i in self.reqlist:
+                    if self.term.is_set():
+                        break
                     i[2] = self.processRequest(i[0])
                     i[1].set()
                     sleep(0.2)
