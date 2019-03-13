@@ -1,4 +1,4 @@
-from json import dumps
+from flask import jsonify
 import mysql.connector
 
 # IMPORTANT NOTES:
@@ -27,7 +27,7 @@ def dbQuery(query,params):
         c.execute(query,params)
         a = c.fetchall() 
     
-        return a if a else []
+        return jsonify(a if a else [[]])
     except Exception as e:
         print("dbQuery: %s" % (str(e)))
         return str(e)
