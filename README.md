@@ -115,28 +115,22 @@ huge treks.
          1. - [x] ByRegionID
          1. - [x] ByRegionName
 
-1. Item Details
+1. Item Details - not necessary for market analysis!
    1. getItemDetails
-      1. - [ ] ByItemID
-      1. - [ ] ByItemName
-   1. getItemVolume
+      1. - [x] ByItemID
+      1. - [x] ByItemName
+   1. getItemVolume - necessary for trade calculation
       1. - [ ] ByItemID
       1. - [ ] ByItemName
    1. getItemDescription
       1. - [ ] ByItemID
       1. - [ ] ByItemName
-   1. Get description of item by ID
-      1. - [ ] ByItemID
-      1. - [ ] ByItemName
-   1. Get description of item by name
-      1. - [ ] ByItemID
-      1. - [ ] ByItemName
-   1. Get item market group of item by ID (redirect to /api/item)
-      1. - [ ] ByItemID
-      1. - [ ] ByItemName
-   1. Get item market group of item by name
-      1. - [ ] ByItemID
-      1. - [ ] ByItemName
+   1. getMarketGroupID
+      1. - [x] ByItemID
+      1. - [x] ByItemName
+   1. getMarketGroupName
+      1. - [x] ByItemID
+      1. - [x] ByItemName
    1. Get skill requirements of item by ID
       1. - [ ] ByItemID
       1. - [ ] ByItemName
@@ -173,3 +167,34 @@ huge treks.
          least collateral should be at the top of the calculated list.
 	 Also, this calculation should do both intra and inter region trades.
 
+#### Stability improvements
+1. Add full exception support
+1. Better organisation of thread class
+1. Save/restore state during shutdown! (pickle)
+
+**UPDATE**
+New algorithm to be implemented:
+For each region
+-For each item in typelist
+--get price history
+--if price history shows profit potential (specific function)
+---add to full-sync list
+--else
+---add to ignore list
+
+Then:
+For each item in full typelist (concatenation of all regions)
+-get all buys and sells for each item in each region
+-sort by price
+
+**UPDATE**
+Currently, the CTRL+C handler in the python install is modified
+to pass along the exception rather than discard it. This modification 
+needs to be more portable.
+
+The original functionality was strange - just ignore KeyboardInterrupt?
+In any case, the KeyboardInterrupt now assumes that further processing 
+will be done in the call stack. It calls shutdown() on the HTTPServer which
+raised it, and re-raises the exception. This exception is caught by the 
+try block in main.py, which cleanly shuts down all threads. Not the best
+approach, but good enough.
