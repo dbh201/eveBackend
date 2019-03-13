@@ -1,5 +1,6 @@
 from importlib import reload
 from flask import Flask,abort,jsonify,request
+from flask_cors import CORS
 import blueprints
 import atexit
 import esi
@@ -24,29 +25,33 @@ def create_app():
 
     def stop_all():
         print("Stopping all threads...")
+        if(app.analyser):
+            if(app.analyser.is_alive()):    
+                app.analyser.terminate()
+                app.analyser.join(10)
+            if(app.analyser.is_alive()):
+                print("analyser timed out. :(")
+
         if(app.ESI.is_alive()):
             app.ESI.terminate()
             app.ESI.join(10)
         if(app.ESI.is_alive()):
             print("ESI timed out. :(")
 
-        if(app.analyser.is_alive()):    
-            app.analyser.terminate()
-            app.analyser.join(10)
-        if(app.ESI.is_alive()):
-            print("analyser timed out. :(")
 
     def start_all():
         app.ESI = esi.ESIConnection()
         app.ESI.start()
-        app.analyser = analyser_thread.Analyser(app.ESI)
-        app.analyser.start()
+        app.analyser = None
+        #app.analyser = analyser_thread.Analyser(app.ESI)
+        #app.analyser.start()
 
     start_all()
     atexit.register(stop_all)
     return app
 
 app = create_app()
+CORS(app,origins="http://localhost:4200")
 @app.route('/')
 def index():
     return "API Status:<br/>ESI Thread: %s, <br/>Analyser Thread: %s, %s" % (
