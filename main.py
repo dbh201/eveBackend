@@ -19,39 +19,42 @@ import analyser_thread
 
 # this script will use the convention item (inventory) and object (space)
 
-def create_app():
-    app = Flask(__name__)
-    blueprints.register_all(app)
+class FlaskMT(Flask):
+    def __init__(self):
+        Flask.__init__(self,__name__)
+        blueprints.register_all(self)
+        self.start_all()
+        atexit.register(self.stop_all)
 
-    def stop_all():
+    def stop_all(self):
         print("Stopping all threads...")
-        if(app.analyser):
-            if(app.analyser.is_alive()):    
-                app.analyser.terminate()
-                app.analyser.join(10)
-            if(app.analyser.is_alive()):
+        if(self.analyser):
+            if(self.analyser.is_alive()):    
+                self.analyser.terminate()
+                self.analyser.join(10)
+            if(self.analyser.is_alive()):
                 print("analyser timed out. :(")
 
-        if(app.ESI.is_alive()):
-            app.ESI.terminate()
-            app.ESI.join(10)
-        if(app.ESI.is_alive()):
+        if(self.ESI.is_alive()):
+            self.ESI.terminate()
+            self.ESI.join(10)
+        if(self.ESI.is_alive()):
             print("ESI timed out. :(")
 
 
-    def start_all():
-        app.ESI = esi.ESIConnection()
-        app.ESI.start()
-        app.analyser = None
-        #app.analyser = analyser_thread.Analyser(app.ESI)
-        #app.analyser.start()
+    def start_all(self):
+        self.ESI = esi.ESIConnection()
+        self.ESI.start()
+        self.analyser = None
+        #self.analyser = analyser_thread.Analyser(self.ESI)
+        #self.analyser.start()
 
-    start_all()
-    atexit.register(stop_all)
-    return app
 
-app = create_app()
+# initialize app
+app = FlaskMT()
 CORS(app,origins="http://localhost:4200")
+
+# app default routes
 @app.route('/')
 def index():
     return "API Status:<br/>ESI Thread: %s, <br/>Analyser Thread: %s, %s" % (
@@ -63,9 +66,15 @@ def index():
 def suspend():
     app.analyser.pause()
     return "Suspended analyser."
+
 @app.route('/resume')
 def resume():
     app.analyser.resume()
     return "Resumed analyser."
+
+# MAIN THREAD
 if __name__ == '__main__':
-    app.run(debug=False,threaded=False)
+    try:
+        app.run(debug=False,threaded=False)
+    except KeyboardInterrupt:
+        app.stop_all()
