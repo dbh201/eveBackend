@@ -5,7 +5,23 @@ from time import sleep
 
 ESI_PROTO = "https://"
 ESI_URL = "esi.evetech.net"
-ESI_VERSION="/latest"
+ESI_VERSION = "/latest"
+
+# ESI endpoints with params
+# ( (<param_name>, <default_value>) )
+# If default value is None, this parameter is required!
+
+# {0} - region_id
+ESI_MARKET_ORDERS = "/markets/%i/orders/"
+ESI_MARKET_ORDERS_PARAMS = ( ('region_id', None), ('order_type', 'all'), ('page', 1), ('type_id', '') )
+
+# {0} - region_id
+ESI_MARKET_HISTORY = "/markets/%i/history/"
+ESI_MARKET_HISTORY_PARAMS = ( ('region_id', None), ('type_id', None) )
+
+# {0} - region_id
+ESI_MARKET_TYPES="/markets/%i/types/"
+ESI_MARKET_TYPES_PARAMS= (  ('region_id', None), ('page', 1) )
 
 class ESIConnection(threading.Thread):
 
@@ -17,31 +33,33 @@ class ESIConnection(threading.Thread):
         self.c.mount("http://", CachingHTTPAdapter(capacity=1000000))
         self.term = threading.Event()
         self.reqlist = []
-        self.resplist = {}
         self.resplistlock = threading.Lock()
         self.nonce = 0
         self.reqlistlock = threading.Lock()
 
-    def getNonce(self):
-        self.nonce+=1
-        return self.nonce
-
-    def getJSONResp(self,req):
-        r = [ req, threading.Event(), None ]
+    def getBuyOrders(self,**kwargs):
+        kwargs['order_type']='buy'
+        for p in ESI_MARKET_ORDERS_PARAMS:
+            if not p[0] in kwargs:
+                if p[1] == None:
+                    raise Exception("Required parameter missing: %s\nParams: %s" % (p,kwargs))
+        return getJSONResp(self,ESI_MARKET_ORDERS % (regionID,),kwargs)
+    def getJSONResp(self,req,params):
+        r = [ req, params, threading.Event(), None ]
 
         self.reqlistlock.acquire()
         self.reqlist.append( r )
         self.reqlistlock.release()
 
-        r[1].wait()
-        return r[2]
+        r[2].wait()
+        return r[3]
 
-    def processRequest(self,req):
+    def processRequest(self,req,p):
         try:
             if not req[0] == '/':
                 req = '/' + req
             req=ESI_PROTO+ESI_URL+ESI_VERSION+req
-            resp = self.c.get(req)
+            resp = self.c.get(req,params=p)
             resp.raise_for_status()
             return resp.json()
 
@@ -65,8 +83,8 @@ class ESIConnection(threading.Thread):
                 for i in self.reqlist:
                     if self.term.is_set():
                         break
-                    i[2] = self.processRequest(i[0])
-                    i[1].set()
+                    i[3] = self.processRequest(i[0],i[1])
+                    i[2].set()
                     sleep(0.2)
             else:
                 sleep(0.2)
