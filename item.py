@@ -7,6 +7,11 @@ from db import dbQuery
 
 _item = Blueprint('_item',__name__)
 _prefix = '/item'
+@_item.route('/<path:path>')
+def itemAPI(path):
+    v=vars(self)
+    d=dir(self)
+    return "Path %s not found.<br/> %s<br/> %s<br/>" % (path, v, d)
 
 ###
 q_getItemNameByItemID='''
@@ -102,4 +107,28 @@ WHERE img.marketGroupName LIKE %s ;
 @_item.route('/list/bymarketgroupname/<string:marketGroupName>', methods=['GET'])
 def getItemsByMarketGroupName(marketGroupName):
     return dbQuery( q_getItemsByMarketGroupName, (str(marketGroupID),) ) 
+###
+
+###
+q_getItemDetailsByItemName='''
+SELECT it.*
+FROM invTypes AS it
+WHERE it.typeName LIKE %s ;
+'''
+@_item.route('/details/byitemname/<string:itemName>', methods=['GET'])
+def getItemDetailsByItemName(itemName):
+    return dbQuery( q_getItemDetailsByItemName, (str(itemName),) )
+###
+
+###
+q_getItemDetailsByItemID='''
+SELECT it.*
+FROM invTypes AS it
+WHERE it.typeID = %s ;
+'''
+@_item.route('/details/byitemid/<int:itemID>', methods=['GET'])
+def getItemDetailsByItemID(itemID):
+    return dbQuery( q_getItemDetailsByItemID, (str(itemID),) )
+###
+
 #############
