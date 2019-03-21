@@ -4,6 +4,7 @@ import market as mk
 import region as rg
 import solarsystem as ss
 import analysis as an
+import icon as ic
 
 _prefix='/api'
 def register_all(_api):
@@ -13,3 +14,4 @@ def register_all(_api):
     _api.register_blueprint(rg._region,url_prefix=_prefix+rg._prefix)
     _api.register_blueprint(ss._solarsystem,url_prefix=_prefix+ss._prefix)
     _api.register_blueprint(an._analysis,url_prefix=_prefix+an._prefix)
+    _api.register_blueprint(ic._icon,url_prefix=_prefix+ic._prefix)
